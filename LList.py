@@ -211,7 +211,7 @@ class LList(object):
             while temp.next != self._tail :
                 temp = temp.next
             self._tail = temp 
-            self._tail.next = self.tail.next
+            self._tail.next = None
         
         return (True, value)
 
