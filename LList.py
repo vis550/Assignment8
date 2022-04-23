@@ -12,6 +12,13 @@
 #     Defines the List ADT
 
 
+
+
+#NAME - VIKHYAT SINGH
+#NSID - VIS550
+#ASSIGNEMNT NUMBER - 8
+
+
 class node(object):
     """ A version of the Node class with public attributes.
         This makes the use of node objects a bit more convenient for 
@@ -132,6 +139,9 @@ class LList(object):
             :return True, idx if the val appears in self
             :return False, None if the vale does not appear in self
         """
+        temp = self._head 
+        idx = 0 
+
         # Loop for finding the val in Linked List
         while temp != None :
             if temp.data == val :
@@ -153,7 +163,25 @@ class LList(object):
             :return The pair (True, value) if self is not empty
             :return The pair (False, None) if self is empty
         """
-        pass
+
+        # Checking the size of Linked List
+        if self._size == 0:
+            return (False, None)
+
+        self._size -= 1 
+        temp = self._head
+        # Storing Value to return 
+        value = temp.data
+
+        if self._size == 0 :
+            self._head = self._tail = None
+        else :
+            self._head = self._head.next 
+
+        # Setting temp previously referred as head to None
+        temp = None
+
+        return (True, value)
 
     def remove_from_back(self):
         """
@@ -166,7 +194,26 @@ class LList(object):
             :return The pair True, value if self is not empty
             :return The pair False, None if self is empty
         """
-        pass
+        if self._size == 0 :
+            return (False, None)
+        
+        self._size -= 1 
+        temp = self._head
+
+        # Storing value to return
+        value = self._tail.data
+
+        if self._size == 0 :
+            self._head = self._tail = None
+        else :
+
+            # Loop for the position of previous node of tail node in Linked List
+            while temp.next != self._tail :
+                temp = temp.next
+            self._tail = temp 
+            self._tail.next = self.tail.next
+        
+        return (True, value)
 
     def retrieve_data(self, idx):
         """
@@ -180,7 +227,20 @@ class LList(object):
             :return (True, val) if val is stored at index idx and idx is valid
             :return (False, None) if the idx is not valid for the list
         """
-        pass
+        temp = self._head
+        index = 0 
+
+        # Loop for finding the index if it is in Linked List
+        while temp != None and index != idx :
+            temp = temp.next
+            index += 1
+
+        # If index found then returning the data
+        if temp != None and index == idx :
+            return (True, temp.data)
+
+        # If index is out of bound from Linked List
+        return (False, None)
 
     def set_data(self, idx, val):
         """
@@ -194,5 +254,19 @@ class LList(object):
         Return:
             :return True if the index was valid, False otherwise
         """
-        pass
+        temp = self._head
+        index = 0 
+
+        # Loop for finding the index if it is in Linked List
+        while temp != None and index != idx :
+            temp = temp.next
+            index += 1
+        
+        # If index found then setting the data
+        if temp != None and index == idx :
+            temp.data = val
+            return True
+
+        # If index not found from Linked List
+        return False
 
