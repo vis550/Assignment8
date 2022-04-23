@@ -53,7 +53,9 @@ class LList(object):
         Return:
             :return True if the list has no data, or False otherwise
         """
-        return None
+        if self._size == 0:
+                return True
+        return False
 
     def size(self):
         """
@@ -62,7 +64,7 @@ class LList(object):
         Return:
             :return The number of data values in the list
         """
-        return None
+        return self._size
 
     def prepend(self, val):
         """
@@ -77,7 +79,19 @@ class LList(object):
         Return:
             :return None
         """
-        pass
+        if self._head == None :
+            self._head = self._tail = node(val)
+        else :
+
+            # Adding the node at the head of Linked List
+            temp = node(val)
+            temp.next = self._head
+            self._head = temp
+
+        # Increasing the size after adding the node
+        self._size += 1
+
+        return None
 
     def append(self, val):
         """
@@ -91,7 +105,19 @@ class LList(object):
         Return:
             :return None
         """
-        pass
+        if self._tail == None :
+            self._head = self._tail = node(val)
+        else :
+
+            # Adding the node at back of the Linked List
+            temp = node(val)
+            self._tail.next = temp 
+            self._tail = temp 
+
+        # Increasing the size after adding the node
+        self._size += 1
+
+        return None
 
 
     def get_index_of_value(self, val):
@@ -106,7 +132,15 @@ class LList(object):
             :return True, idx if the val appears in self
             :return False, None if the vale does not appear in self
         """
-        pass
+        # Loop for finding the val in Linked List
+        while temp != None :
+            if temp.data == val :
+                return (True, idx)
+            temp = temp.next 
+            idx += 1
+        
+        # If val not found
+        return (False, None)
 
     def remove_from_front(self):
         """
